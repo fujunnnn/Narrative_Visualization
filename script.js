@@ -15,7 +15,7 @@ d3.csv("dataset.csv").then(data => {
 function setScene(sceneIndex) {
   state.scene = sceneIndex;
   svg.selectAll("*").remove(); // Clear previous scene
-  
+
   if (sceneIndex === 0) scene1();
   else if (sceneIndex === 1) scene2();
   else if (sceneIndex === 2) scene3();
@@ -23,42 +23,6 @@ function setScene(sceneIndex) {
 
 // Scene 1: Basic scatterplot
 function scene1() {
-  // const margin = { top: 40, right: 150, bottom: 50, left: 60 };
-  // const plotWidth = width - margin.left - margin.right;
-  // const plotHeight = height - margin.top - margin.bottom;
-
-  // // Define x and y scales
-  // const x = d3.scaleLinear()
-  //   .domain([d3.min(state.data, d => +d.horsepower) - 10, d3.max(state.data, d => +d.horsepower) + 10])
-  //   .range([margin.left, margin.left + plotWidth]);
-
-  // const y = d3.scaleLinear()
-  //   .domain([d3.min(state.data, d => +d.mpg) - 2, d3.max(state.data, d => +d.mpg) + 2])
-  //   .range([margin.top + plotHeight, margin.top]);
-
-  // // Add x-axis
-  // svg.append("g")
-  //   .attr("transform", `translate(0,${margin.top + plotHeight})`)
-  //   .call(d3.axisBottom(x))
-  //   .append("text")
-  //   .attr("x", plotWidth / 2)
-  //   .attr("y", 40)
-  //   .attr("fill", "black")
-  //   .style("text-anchor", "middle")
-  //   .text("Horsepower");
-
-  // // Add y-axis
-  // svg.append("g")
-  //   .attr("transform", `translate(${margin.left},0)`)
-  //   .call(d3.axisLeft(y))
-  //   .append("text")
-  //   .attr("transform", "rotate(-90)")
-  //   .attr("x", -plotHeight / 2)
-  //   .attr("y", -40)
-  //   .attr("fill", "black")
-  //   .style("text-anchor", "middle")
-  //   .text("MPG");
-	
   svg.append("text")
     .attr("x", 20)
     .attr("y", 30)
@@ -101,26 +65,6 @@ function scene2() {
 
 // Scene 3: Categorical color encoding
 function scene3() {
-  const legend = svg.append("g")
-    .attr("transform", `translate(${width - 120}, ${margin.top})`);
-
-  const origins = colorScale.domain();
-  origins.forEach((origin, i) => {
-    legend.append("rect")
-      .attr("x", 0)
-      .attr("y", i * 20)
-      .attr("width", 12)
-      .attr("height", 12)
-      .attr("fill", colorScale(origin));
-
-    legend.append("text")
-      .attr("x", 20)
-      .attr("y", i * 20 + 10)
-      .text(origin)
-      .style("font-size", "12px")
-      .attr("alignment-baseline", "middle");
-  });
-	
   svg.append("text")
     .attr("x", 20)
     .attr("y", 30)
@@ -161,5 +105,3 @@ function addAnnotation(label, x, y) {
 
   svg.append("g").call(makeAnnotations);
 }
-
-
