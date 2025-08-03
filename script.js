@@ -91,6 +91,28 @@ function scene3() {
   addAnnotation("Country origin colored", 160, 220);
 }
 
+function addLegend(colorScale) {
+  const legend = svg.append("g")
+    .attr("transform", `translate(${width - 150}, 60)`);
+
+  const origins = colorScale.domain();
+  origins.forEach((origin, i) => {
+    legend.append("rect")
+      .attr("x", 0)
+      .attr("y", i * 20)
+      .attr("width", 12)
+      .attr("height", 12)
+      .attr("fill", colorScale(origin));
+
+    legend.append("text")
+      .attr("x", 20)
+      .attr("y", i * 20 + 10)
+      .text(origin)
+      .style("font-size", "12px")
+      .attr("alignment-baseline", "middle");
+  });
+}
+
 function addAnnotation(label, x, y) {
   const annotations = [{
     note: {
@@ -108,4 +130,5 @@ function addAnnotation(label, x, y) {
 
   svg.append("g").call(makeAnnotations);
 }
+
 
