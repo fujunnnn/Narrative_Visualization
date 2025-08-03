@@ -7,7 +7,7 @@ let state = {
   data: []
 };
 
-d3.csv("dataset.csv").then(data => {
+d3.csv("data.csv").then(data => {
   state.data = data;
   setScene(0);
 });
@@ -16,12 +16,20 @@ function setScene(sceneIndex) {
   state.scene = sceneIndex;
   svg.selectAll("*").remove(); // Clear previous scene
 
+  // Coordinator label for current scene
+  svg.append("text")
+    .attr("id", "scene-label")
+    .attr("x", width - 200)
+    .attr("y", 30)
+    .style("font-size", "16px")
+    .style("fill", "gray")
+    .text("Scene: " + (sceneIndex + 1));
+
   if (sceneIndex === 0) scene1();
   else if (sceneIndex === 1) scene2();
   else if (sceneIndex === 2) scene3();
 }
 
-// Scene 1: Basic scatterplot
 function scene1() {
   svg.append("text")
     .attr("x", 20)
@@ -29,7 +37,6 @@ function scene1() {
     .text("Scene 1: Overview")
     .style("font-size", "18px");
 
-  // Draw scatterplot circles
   svg.selectAll("circle")
     .data(state.data)
     .enter()
@@ -39,11 +46,9 @@ function scene1() {
     .attr("r", 5)
     .attr("fill", "steelblue");
 
-  // Annotations
   addAnnotation("High efficiency", 150, 200);
 }
 
-// Scene 2: Filtered or sorted data
 function scene2() {
   svg.append("text")
     .attr("x", 20)
@@ -63,7 +68,6 @@ function scene2() {
   addAnnotation("Cars >30 MPG", 120, 180);
 }
 
-// Scene 3: Categorical color encoding
 function scene3() {
   svg.append("text")
     .attr("x", 20)
@@ -87,7 +91,6 @@ function scene3() {
   addAnnotation("Country origin colored", 160, 220);
 }
 
-// Annotation helper
 function addAnnotation(label, x, y) {
   const annotations = [{
     note: {
@@ -104,5 +107,4 @@ function addAnnotation(label, x, y) {
     .annotations(annotations);
 
   svg.append("g").call(makeAnnotations);
-
 }
