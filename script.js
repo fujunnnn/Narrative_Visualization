@@ -73,6 +73,11 @@ function setScene(sceneIndex) {
     .attr("x", 20)
     .attr("y", 10)
     .text(d => d[0]);
+
+
+  if (sceneIndex === 0) scene1();
+  else if (sceneIndex === 1) scene2();
+  else if (sceneIndex === 2) scene3();
 }
 
 
@@ -180,5 +185,6 @@ function addLegend(colorScale) {
       .attr("alignment-baseline", "middle");
   });
 }
+
 
 
