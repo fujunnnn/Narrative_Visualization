@@ -7,7 +7,7 @@ let state = {
   data: []
 };
 
-d3.csv("data.csv").then(data => {
+d3.csv("dataset.csv").then(data => {
   state.data = data;
   setScene(0);
 });
@@ -104,4 +104,5 @@ function addAnnotation(label, x, y) {
     .annotations(annotations);
 
   svg.append("g").call(makeAnnotations);
+
 }
