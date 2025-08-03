@@ -89,6 +89,7 @@ function scene3() {
     .attr("fill", d => colorScale(d.origin));
 
   addAnnotation("Country origin colored", 160, 220);
+  addLegend(colorScale);
 }
 
 function addLegend(colorScale) {
@@ -130,5 +131,6 @@ function addAnnotation(label, x, y) {
 
   svg.append("g").call(makeAnnotations);
 }
+
 
 
