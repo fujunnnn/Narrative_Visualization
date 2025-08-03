@@ -16,14 +16,15 @@ function setScene(sceneIndex) {
   state.scene = sceneIndex;
   svg.selectAll("*").remove(); // Clear previous scene
 
-  // Coordinator label for current scene
+  // Coordinator
   svg.append("text")
-    .attr("id", "scene-label")
-    .attr("x", width - 200)
-    .attr("y", 30)
-    .style("font-size", "16px")
-    .style("fill", "gray")
-    .text("Scene: " + (sceneIndex + 1));
+  .attr("id", "scene-label")
+  .attr("x", width - 100)
+  .attr("y", height - 10)
+  .style("font-size", "14px")
+  .style("fill", "#999")
+  .style("font-style", "italic")
+  .text("Coordinator: Scene " + (sceneIndex + 1));
 
   if (sceneIndex === 0) scene1();
   else if (sceneIndex === 1) scene2();
@@ -131,6 +132,7 @@ function addAnnotation(label, x, y) {
 
   svg.append("g").call(makeAnnotations);
 }
+
 
 
 
