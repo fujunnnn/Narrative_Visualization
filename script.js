@@ -285,7 +285,7 @@ function scene1() {
     .attr('r', 5)
     .attr('fill', d => colorScale(d.origin));
 
-   svg
+  svg
     .selectAll('text.label')
     .data(state.data)
     .enter()
