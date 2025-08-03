@@ -16,15 +16,15 @@ function setScene(sceneIndex) {
   state.scene = sceneIndex;
   svg.selectAll("*").remove(); // Clear previous scene
 
-  // Coordinator
+  // Coordinator label - bottom right
   svg.append("text")
-  .attr("id", "scene-label")
-  .attr("x", width - 100)
-  .attr("y", height - 10)
-  .style("font-size", "14px")
-  .style("fill", "#999")
-  .style("font-style", "italic")
-  .text("Coordinator: Scene " + (sceneIndex + 1));
+    .attr("id", "scene-label")
+    .attr("x", width - 120)
+    .attr("y", height - 10)
+    .style("font-size", "14px")
+    .style("fill", "#999")
+    .style("font-style", "italic")
+    .text("Coordinator: Scene " + (sceneIndex + 1));
 
   if (sceneIndex === 0) scene1();
   else if (sceneIndex === 1) scene2();
@@ -93,6 +93,24 @@ function scene3() {
   addLegend(colorScale);
 }
 
+function addAnnotation(label, x, y) {
+  const annotations = [{
+    note: {
+      label: label,
+      title: "Note"
+    },
+    x: x,
+    y: y,
+    dy: -30,
+    dx: 50
+  }];
+
+  const makeAnnotations = d3.annotation()
+    .annotations(annotations);
+
+  svg.append("g").call(makeAnnotations);
+}
+
 function addLegend(colorScale) {
   const legend = svg.append("g")
     .attr("transform", `translate(${width - 150}, 60)`);
@@ -114,25 +132,3 @@ function addLegend(colorScale) {
       .attr("alignment-baseline", "middle");
   });
 }
-
-function addAnnotation(label, x, y) {
-  const annotations = [{
-    note: {
-      label: label,
-      title: "Note"
-    },
-    x: x,
-    y: y,
-    dy: -30,
-    dx: 50
-  }];
-
-  const makeAnnotations = d3.annotation()
-    .annotations(annotations);
-
-  svg.append("g").call(makeAnnotations);
-}
-
-
-
-
