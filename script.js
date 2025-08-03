@@ -23,6 +23,45 @@ function setScene(sceneIndex) {
 
 // Scene 1: Basic scatterplot
 function scene1() {
+  
+  // Set up margins and inner chart dimensions
+  const margin = { top: 40, right: 150, bottom: 50, left: 60 };
+  const plotWidth = width - margin.left - margin.right;
+  const plotHeight = height - margin.top - margin.bottom;
+
+  // Define x and y scales
+  const x = d3.scaleLinear()
+    .domain([d3.min(state.data, d => +d.horsepower) - 10, d3.max(state.data, d => +d.horsepower) + 10])
+    .range([margin.left, margin.left + plotWidth]);
+
+  const y = d3.scaleLinear()
+    .domain([d3.min(state.data, d => +d.mpg) - 2, d3.max(state.data, d => +d.mpg) + 2])
+    .range([margin.top + plotHeight, margin.top]);
+
+  // Add x-axis
+  svg.append("g")
+    .attr("transform", `translate(0,${margin.top + plotHeight})`)
+    .call(d3.axisBottom(x))
+    .append("text")
+    .attr("x", plotWidth / 2)
+    .attr("y", 40)
+    .attr("fill", "black")
+    .style("text-anchor", "middle")
+    .text("Horsepower");
+
+  // Add y-axis
+  svg.append("g")
+    .attr("transform", `translate(${margin.left},0)`)
+    .call(d3.axisLeft(y))
+    .append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("x", -plotHeight / 2)
+    .attr("y", -40)
+    .attr("fill", "black")
+    .style("text-anchor", "middle")
+    .text("MPG");
+
+  //////////////////////////////////////////////////////////
   svg.append("text")
     .attr("x", 20)
     .attr("y", 30)
@@ -126,4 +165,5 @@ function addAnnotation(label, x, y) {
 
   svg.append("g").call(makeAnnotations);
 }
+
 
